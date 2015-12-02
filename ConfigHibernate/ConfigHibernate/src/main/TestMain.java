@@ -22,13 +22,23 @@ public class TestMain
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Book b = new Book();
+       /* Book b = new Book();
         b.setName("兄弟");
         b.setAuthor("unknow");
         b.setPrice(12.1);
         b.setInfo("123qwer");
         b.setPublishDate(new java.util.Date());
-        session.save(b);
+        session.save(b);*/
+        
+        //测试flush
+        Book b = (Book) session.get(Book.class, 1);
+        System.out.println(b);
+        b.setAuthor("sun123");
+        //session.flush();
+        
+        Book b2 = (Book) session.createCriteria(Book.class).uniqueResult();
+        System.out.println(b2);
+        
 
         transaction.commit();
         session.close();
